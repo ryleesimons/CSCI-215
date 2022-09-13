@@ -49,10 +49,24 @@
     */
 
     // input
-
+let catNames = prompt ("Enter cat names (separate by commas):");
+console.log(catNames);
+document.getElementById('names').innerHTML = catNames;
     // compute
+const catNameArr = catNames.split(",");
+console.log(catNameArr);
+
+for (let i=0; i<catNameArr.length; i++)
+    {let stringoutput = '${i} - ${catNameArr[i]}<br>';
+    document.getElementById('listOfNames').innerHTML+= stringoutput;}
+    //Bonus
+catNameArr.sort();
+for (let i = 0; i < catNameArr.length ; i++ )
+    {let stringoutput = '${i} - ${catNameArr[i]}<br>';
+    document.getElementById('listOfNamesSorted').innerHTML+= stringoutput;}
 
     // output into elements in the UI
+
 
 </script>
 </body>
