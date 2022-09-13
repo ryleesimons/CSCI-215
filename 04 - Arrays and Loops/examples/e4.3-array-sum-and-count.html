@@ -25,11 +25,16 @@
     */
 
     // input
-
+let input = prompt("Enter numbers (separate by commas):");
+const inputArray = input.split(",");
     // calculate
 
     // output
+for (let i=0; i<inputArray.length; i++) {sum = sum + inputArray[i]; }
 
+document.getElementById('input').innerHTML = input;
+document.getElementById('count').innerHTML = inputArray.length;
+document.getElementById('sum').innerHTML = sum;
 </script>
 </body>
 </html>
