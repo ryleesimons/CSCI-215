@@ -4,10 +4,17 @@
 </head>
 <body>
 <script type="text/Javascript">
-	/*
-		Displays a pop-up alert in browser
-	 */
-	alert('Welcome to CSCI-215!');
+let letterArray = prompt('Enter Value:').split(',');
+const aVals = [];
+const bVals = [];
+for (let i = 0; i <letterArray.length; i++){
+	if (letterArray[i].toLowerCase() === 'a') {
+		aVals.push(letterArray[i]);
+	} else if (letterArray[i].toLowerCase()=== 'b') {
+	bVals.push(letterArray[i]);
+}
+
+
 </script>
 </body>
 </html>
