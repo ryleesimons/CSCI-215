@@ -6,7 +6,12 @@
 <h1 id="hello"></h1>
 <script type="text/Javascript">
 	// update the DOM
-	document.getElementById('hello').innerHTML = "Welcome to CSCI-215!";
+	let input = prompt("Enter turn(right or left), Street name, and Miles:", "R,Calhoun Street, 3.2;L,Concord Street, 4.5;R, Wharf Street 0.1");
+
+const array1 = input.split(";");
+    for (let i=0; i<array1.length; i++) {
+    const array2 = array1[i].split(",");
+    for (let j=0; j < array2.length; j++); }
 </script>
 </body>
 </html>
