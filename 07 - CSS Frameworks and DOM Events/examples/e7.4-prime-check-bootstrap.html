@@ -25,7 +25,60 @@
 </head>
 <body>
 <script type="text/Javascript">
- 
+     /**
+     * Clear the display
+     */
+    function clearDisplay() {
+        document.getElementById('respMsgText').innerHTML = '';
+        document.getElementById('respMsgAlert').classList.add('visually-hidden');
+        document.getElementById('primeCheckResults').innerHTML = '';
+    }
+
+    /**
+     * This is the main function where the prime number is evaluated and the results are displayed
+     */
+    function checkPrime() {
+        clearDisplay();
+        
+        // get value by id from the UI
+        let number = document.getElementById('numberToEvaluate').value;
+        console.log(number);
+
+        // if the input is valid evaluate if the number is a prime
+        if (isValid(number)) {
+            const divsors = [];
+            let isPrime = true;
+            for (let i=2; i<number; i++) {
+                if (number%i == 0) {
+                    isPrime = false;
+                    divsors.push(i);
+                }
+            }
+            // output
+            if (isPrime) {
+                document.getElementById('primeCheckResults').innerHTML = `${number} is a Prime Number :)`;
+            } else {
+                document.getElementById('primeCheckResults').innerHTML = `${number} is not a Prime Number it is divisible by ${divsors}`;
+            }
+        } else {
+            // alert
+            document.getElementById('respMsgText').innerHTML = `The input '${number}' is not a valid number`;
+            document.getElementById('respMsgAlert').classList.remove('visually-hidden');
+        }
+    }
+
+    /**
+     * Move validation to a function to clean up the code and make it more readable.
+     * @param number
+     * @returns {boolean}
+     */
+    function isValid(number) {
+        if (number - number === 0 && number > 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 </script>
 </body>
 </html>
