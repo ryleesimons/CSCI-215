@@ -1,0 +1,49 @@
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF"
+          crossorigin="anonymous">
+    <style>
+        .cursor {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <h2>Stock Symbols</h2>
+            <ul>
+                <li class="cursor" onclick="loadRemoteContent('1')">BABA</li>
+                <li class="cursor" onclick="loadRemoteContent('2')">PDD</li>
+                <li class="cursor" onclick="loadRemoteContent('3')">BIDU</li>
+                <li class="cursor" onclick="loadRemoteContent('4')">TCDA</li>
+                <li class="cursor" onclick="loadRemoteContent('5')">MOTS</li>
+            </ul>
+        </div>
+        <div class="col-4">
+            <h2>Company Name</h2>
+            <div id="additionalInfo"></div>
+        </div>
+    </div>
+</div>
+<script>
+      /**
+     * Load remote content for id
+     * @param id
+     */
+    function loadRemoteContent(id) {
+        const ajaxRequest = new XMLHttpRequest();
+        ajaxRequest.onload = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("additionalInfo").innerHTML = this.responseText;
+            }
+        }
+        ajaxRequest.open("GET", "https://simonsrq.stu.cofc.edu/CSCI215/Fall2022/10/stock-info.php?id="+id);
+        ajaxRequest.send();
+    }
+
+</script>
+</body>
+</html>
