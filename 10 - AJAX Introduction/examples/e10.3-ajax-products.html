@@ -34,7 +34,20 @@
     </div>
 </div>
 <script>
-    //TODO
+      /**
+     * Load remote content for id
+     * @param id
+     */
+    function loadRemoteContent(id) {
+        const ajaxRequest = new XMLHttpRequest();
+        ajaxRequest.onload = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("additionalInfo").innerHTML = this.responseText;
+            }
+        }
+        ajaxRequest.open("GET", "https://tcmoorer.people.cofc.edu/CSCI215/Spring2022/10/e10.3-products.php?id="+id);
+        ajaxRequest.send();
+    }
 
 </script>
 </body>
