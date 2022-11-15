@@ -1,0 +1,69 @@
+<!--
+The following URL provides a set of 10 random numbers between 0 and 100.
+
+https://tcmoorer.people.cofc.edu/CSCI215/Fall2022/exam2/exam.02-random.php
+
+Provide a complete AJAX application that uses the URL above to get two random sets of numbers. The format
+of the result will be a comma separated string of 10 random numbers. The application should store and
+use the response to display the following:
+
+1. each set of random numbers
+2. in each set, the sum of the values
+3. in each set, the count of numbers with a value below 50
+4. in each set, the count of numbers with a value of 50 or higher
+5. if the sets of random numbers are unique or have overlapping values (i.e. are there common values in each set)
+
+Format the output in the div with id 'output'.
+
+Use a JavScript object to define the properties and functions needed for the application.
+
+-->
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF"
+          crossOrigin="anonymous">
+    <style>
+    </style>
+</head>
+<body>
+<div id="output"></div>
+<h2> Sum of Value </h2>
+<div id="order"></div>
+<h2> Below 50 </h2>
+<div id="high"></div>
+<h2> 50 or Above </h2>
+<div id="low"></div>
+<script>
+    loadAjax("https://tcmoorer.people.cofc.edu/CSCI215/Fall2022/exam2/exam.02-random.php", seeNumbers);
+
+    function loadAjax(url, cFunction){
+      const ajaxRequest = new XMLHttpRequest();
+      ajaxRequest.onload = function() {cFunction(this);}
+      ajaxRequest.open("GET", url);
+      ajaxRequest.send();
+    }
+
+    function seeNumbers(ajaxRequest){
+      const numbers = ajaxRequest.responseText;
+      const numberarray = numbers.split(',');
+      document.getElementById('output').innerHTML = numbers;
+      let sum = 0;
+      let lcount = 0;
+      let hcount = 0;
+      let duplicates = false;
+      for (let i = 0; i <numberarray.length; i++){
+        sum = parseFloat(sum) + parseFloat(numberarray[i]);
+        if (numberarray[i]>50) {
+          hcount += 1;
+        } else {
+          lcount += 1;
+        }
+        }
+      document.getElementById('order').innerHTML = sum;
+      document.getElementById('high').innerHTML = hcount;
+      document.getElementById('low').innerHTML = lcount;
+    }
+</script>
+</body>
+</html>
