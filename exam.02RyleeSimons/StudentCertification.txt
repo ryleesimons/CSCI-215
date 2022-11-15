@@ -1,0 +1,20 @@
+======================================================================================================
+ Student Certification
+======================================================================================================
+
+    This assignment is individual work only!
+
+    I certify that I have written this code myself. Nobody else has written it for me. I have not copied and
+    pasted it from somebody else. I have solved these problems myself using the materials used in class.
+
+    If I am found guilty of breaking these rules or conducting other dishonest actions while working on this
+    assignment, I understand that I will receive a score of 0 for this assignment, and that the instructor may
+    report my dishonesty for a conduct review by the Dean of Student Affairs which could result in an F in
+    this course.
+
+    I acknowledge the above rules of this assignment.
+
+    NAME: Rylee Quinn simons
+    DATE:11/02/2022
+
+======================================================================================================
