@@ -1,0 +1,193 @@
+
+<!--
+
+Provide an HTML form that a user completes to rent a truck. Include the following form elements:
+
+- Pick Up Date
+- Pick Up City
+- Pick Up State
+- Rental Days
+
+Use a single JavaScript object to manage the application (data elements and functions). Assume the user
+will enter the date in MM/DD/YYYY format such as 03/21/2022. Truck rental is $29.99/day. Provide simple
+validation that the above attributes have been provided by the user before processing.
+
+When the user submits the form perform validation and if there are no errors display an 'Order Summary'
+which includes the values the user entered and an estimated total based on the number of days the truck
+is expected to be rented. Display validation errors as appropriate. These functions should be a part of
+the object.
+
+Use bootstrap grid for the layout. The form will be on the left and the 'Order Summary' will be on the right.
+
+-->
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF"
+          crossorigin="anonymous">
+    <style>
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+<h1 class="mt-3">Truck Rental</h1>
+            <p>
+                Complete the form below.
+            </p>
+            <div id="respMsgAlert" class="alert alert-danger visually-hidden" role="alert">
+                <div id="respMsgText"></div>
+            </div>
+                <div class="mb-3">
+                    <label for="date" class="form-label"><span class="required">*</span> Pick Up Date</label>
+                    <input type="text" class="form-control" name="date" id="date" onfocus="clearValidation()" onblur="validatedate()">
+                    <div id="dateValidation" class="errorMsg"></div>
+                </div>
+                  <div class="mb-3">
+                    <label for="city" class="form-label"><span class="required">*</span> Pick Up City</label>
+                    <input type="text" class="form-control" name="city" id="city" onfocus="clearValidation()" onblur="validatecity()">
+                    <div id="cityValidation" class="errorMsg"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="state" class="form-label"><span class="required">*</span> Pick Up State </label>
+                    <input type="text" class="form-control" name="state" id="state" onfocus="clearValidation()" onblur="validatestate()">
+                    <div id="stateValidation" class="errorMsg"></div>
+                </div>
+                 <div class="mb-3">
+                    <label for="days" class="form-label"><span class="required">*</span> Rental Days</label>
+                    <input type="text" class="form-control" name="days" id="days" onfocus="clearValidation()" onblur="validatedays()">
+                    <div id="daysValidation" class="errorMsg"></div>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="submitForm()">Submit</button>
+            <span class="required">*</span> denotes a value is required to proceed.
+        </div>
+        <div class="col-6">
+<h1 class = "mt-3"> Order Summary </h1>
+    <p>
+        Get ready for your rental!
+    </p>
+    <div class= "col-6">
+        <label for = "pickUpDate" class="form-label"> Confirmed Pick Up Date </label>
+        <input type="text" class= "form-control" name="pickUpDate" id="pickUpDate"> 
+        </div>
+    <div class= "col-6">
+        <label for = "pickUpCity" class="form-label"> Confirmed Pick Up City </label>
+        <input type="text" class= "form-control" name="pickUpCity" id="pickUpCity"> 
+        </div>
+    <div class= "col-6">
+        <label for = "pickUpState" class="form-label"> Confirmed Pick Up State </label>
+        <input type="text" class= "form-control" name="pickUpState" id="pickUpState"> 
+        </div>
+    <div class= "col-6">
+        <label for = "rentalDays" class="form-label"> Confirmed Rental Days </label>
+        <input type="text" class= "form-control" name="rentalDays" id="rentalDays"> 
+        </div>
+    <div class= "col-6">
+        <label for = "total" class="form-label"> Total Rental Cost </label>
+        <input type="text" class= "form-control" name="total" id="total"> 
+        </div>
+</div>
+<script>
+const NAME_MAX_LENGTH = 20;
+    let pageIsValid = false;
+    const price = 29.99;
+    let date = '';
+    let city = '';
+    let state = '';
+    let day = 0;
+    function submitForm() {
+        if (pageIsValid){
+            transferinfo();
+            calctotal();
+        }
+    }
+
+    /**
+     * Clear validation
+     */
+    function clearValidation() {
+        document.getElementById('dateValidation').innerHTML = '';
+        document.getElementById('cityValidation').innerHTML = '';
+        document.getElementById('stateValidation').innerHTML = '';
+        document.getElementById('daysValidation').innerHTML = '';
+    }
+
+    /**
+     * Validate 
+     */
+    function validatedate() {
+        let date = document.getElementById('date').value;
+        if (date.length === 0) {
+            document.getElementById('dateValidation').innerHTML = 'Pick Up Date is required (MM/DD/YYYY)!';
+            pageIsValid = false;
+        } else if (date.length > NAME_MAX_LENGTH) {
+            document.getElementById('dateValidation').innerHTML = `Date cannot exceed ${NAME_MAX_LENGTH} characters!`;
+            pageIsValid = false;
+        } else {
+            pageIsValid = true;
+        }
+    }
+    function validatecity() {
+      let city = document.getElementById('city').value;
+        if (city.length === 0) {
+            document.getElementById('cityValidation').innerHTML = 'Pick Up City is required!';
+            pageIsValid = false;
+        } else if (city.length > NAME_MAX_LENGTH) {
+            document.getElementById('cityValidation').innerHTML = `City name cannot exceed ${NAME_MAX_LENGTH} characters!`;
+            pageIsValid = false;
+        } else {
+            pageIsValid = true;
+        }
+    }
+
+    function validatestate() {
+      let state = document.getElementById('state').value;
+        if (state.length === 0) {
+            document.getElementById('stateValidation').innerHTML = 'Pick Up State is required!';
+            pageIsValid = false;
+        } else if (state.length > NAME_MAX_LENGTH) {
+            document.getElementById('stateValidation').innerHTML = `State name cannot exceed ${NAME_MAX_LENGTH} characters!`;
+            pageIsValid = false;
+        } else {
+            pageIsValid = true;
+        }
+    }
+
+      function validatedays() {
+      let day = document.getElementById('days').value;
+        if (day.length === 0) {
+            document.getElementById('daysValidation').innerHTML = 'The amount of rental days is required!';
+            pageIsValid = false;
+        } else if (isNaN(day) || day < 0) {
+            document.getElementById('daysValidation').innerHTML = `The amount of rental days must be greater than 0`;
+            pageIsValid = false;
+        } else {
+            pageIsValid = true;
+        }
+    }
+    function transferinfo(){
+        date = document.getElementById('date').value;
+        document.getElementById('pickUpDate').value = date;
+        document.getElementById('pickUpDate').value = date;
+        city = document.getElementById('city').value;
+        document.getElementById('pickUpCity').value = city;
+        document.getElementById('pickUpCity').value = city;
+        state = document.getElementById('state').value;
+        document.getElementById('pickUpState').value = state;
+        document.getElementById('pickUpState').value = state;
+        day = document.getElementById('days').value;
+        document.getElementById('rentalDays').value = day;
+        document.getElementById('rentalDays').value = day;
+
+    }
+
+    function calctotal(){
+        let numofday = document.getElementById('days').value;
+        let finaltotal = parseFloat(numofday) * parseFloat(price);
+        document.getElementById('total').value = finaltotal;
+        document.getElementById('total').innerHTML = finaltotal;
+    }
+</script>
+</body>
+</html>
